@@ -27,6 +27,7 @@ public class CalculadoraStack {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Variables para el menu
         boolean keep = true;
         while (keep == true){
             System.out.print("\n-----------------Menu-----------------"
@@ -34,7 +35,9 @@ public class CalculadoraStack {
                         "\n 2. Calcular resultado"+
                         "\n 3. Salir "+
                         "\n----------------------------------------");
+            //Lectura de ingreso
         String ingreso = JOptionPane.showInputDialog("Ingrese la opcion del menu que desee vizualizar: ");
+        //Verificacion de que existan datos para operar
         if(path == null && !("1").equals(ingreso)){
             if(ingreso.equals("3")){
                 System.exit(0);
@@ -46,6 +49,7 @@ public class CalculadoraStack {
         else{
             switch(ingreso){
                 case "1":
+                    //Abrir archivos 
                     int r = file.showOpenDialog(null);
                     
                     if (r == JFileChooser.APPROVE_OPTION) {
@@ -56,12 +60,14 @@ public class CalculadoraStack {
                     break;
                     
                 case "2":
+                    //Calcular resultado mediante el path del archivo seleccionado
                     cal = new ProtCalculadora();
                     String resultadoString = cal.decode(path);
                     System.out.println("\n" + resultadoString);
                     break;
                     
                 case "3":
+                    //salir del programa
                     System.exit(0);
                     
                     

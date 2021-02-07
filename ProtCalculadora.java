@@ -24,6 +24,7 @@ public class ProtCalculadora implements calculadora {
      */
     @Override
     public int suma(int x, int y) {
+        //Suma 2 valores
         resultado = x + y;
         return resultado;
     }
@@ -35,6 +36,7 @@ public class ProtCalculadora implements calculadora {
  */
     @Override
     public int resta(int x, int y) {
+        //Resta 2 valores
         resultado = y - x;
         return resultado;
     }
@@ -46,6 +48,7 @@ public class ProtCalculadora implements calculadora {
      */
     @Override
     public int multiplicacion(int x, int y) {
+        //Multiplica 2 valores
         resultado = x * y;
         return resultado;
     }
@@ -57,6 +60,7 @@ public class ProtCalculadora implements calculadora {
      */
     @Override
     public int division(int x, int y) {
+        //Divide 2 valores
         resultado = y/x;
         return resultado;
     }
@@ -67,7 +71,8 @@ public class ProtCalculadora implements calculadora {
      */
     @Override
     public int operar(stack x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //No implementado
+        return 0; 
     }
     /**
      * 
@@ -76,6 +81,7 @@ public class ProtCalculadora implements calculadora {
      */
     @Override
     public String decode(String a) {
+        //Crear pila y calculadora
         calculadora cal;
         MyStack<Integer> Stack;
         
@@ -90,18 +96,18 @@ public class ProtCalculadora implements calculadora {
         String datos;
         
         try{
-           
+           //Lectura del archivo
             lector = new FileReader(a);
             lector1 = new BufferedReader(lector);
             
             datos = lector1.readLine();
-            
+            //Verificar que no este vacio el archivo
             while (datos!=null){
                
                String partes[] = datos.split(" ");
-               
+               //Leer cada linea del archivo
                for (int i=0; i < partes.length; i++){
-                   
+                   //Si operador = +
                    if ((partes[i].equals("+"))){
                        int resultado;
                        int x = Stack.pop();
@@ -110,6 +116,7 @@ public class ProtCalculadora implements calculadora {
                        Stack.push(resultado); 
                        pros = pros + ("\n" + partes[i] +"\tSumar: pop, pop y push del resultado " + "\t" + resultado);
                     }
+                   //Si operador = -
                    else if((partes[i].equals("-"))){
                        int resultado;
                        int x = Stack.pop();
@@ -118,14 +125,17 @@ public class ProtCalculadora implements calculadora {
                        Stack.push(resultado);  
                        pros = pros + ("\n" + partes[i] + "\tResta: pop, pop y push del resultado " + "\t" + resultado);
                    }
+                   //Si operador = *
                    else if((partes[i].equals("*"))){
                        int resultado;
                        int x = Stack.pop();
                        int y = Stack.pop();
                        resultado = cal.multiplicacion(x, y);
                        Stack.push(resultado); 
+                       //String resultante
                        pros = pros + ( "\n" +  partes[i] + "\tMultiplicar: pop, pop y push del resultado "  + "\t" + resultado);
                    }
+                   //Si operador = /
                    else if((partes[i].equals("/"))){
                        int resultado;
                        int x = Stack.pop();
@@ -136,7 +146,7 @@ public class ProtCalculadora implements calculadora {
                    }
                   
                    else{
-                       
+                       //En caso que la entrada sea un numero
                        if(Stack.size() < 1){
                         pros = pros + ("\n" + partes[i] + "\tPush operando" + "\t" + partes[i] );
                        }
@@ -149,7 +159,7 @@ public class ProtCalculadora implements calculadora {
                        
                   }
                }
-               //muestra el resultado de la linea de texto 
+               //String resultante completo
                res = ("RESULTADO: " + Stack.peek() + "\n" + "ENTRADA" + "\t OPERACION" + "\t\t PILA");
                res = res + "\n "+ pros;
                //lee otra linea
@@ -157,6 +167,7 @@ public class ProtCalculadora implements calculadora {
                
             }
         }
+        //Errores de aritmetica o en caso que el archivo no sea .txt
          catch(ArithmeticException | IOException | NumberFormatException e){
             res = e.toString();
         }
